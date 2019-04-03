@@ -9,8 +9,9 @@ public class personajeControlador : MonoBehaviour
     public float VelocidadMax = 3.5f;
     public bool TocandoSuelo = false;
     public bool saltar;
-    public float fuerzaSalto = 8.25f;
-
+    public bool saltoDoble;
+    public float fuerzaSalto = 7f;
+    
     private Rigidbody2D rg2d;
     private Animator animador;
     // Start is called before the first frame update
@@ -18,9 +19,12 @@ public class personajeControlador : MonoBehaviour
     public SpriteRenderer[] vida;
     public SpriteRenderer[] sinVidas;
     private int vidas = 2;
+
     void Start()
     {
-        Physics2D.gravity *= 1.4f;
+        Physics2D.gravity = new Vector2(0f,-13.5f);
+        Physics2D.gravity *= 1.8f;
+        Debug.Log(Physics2D.gravity);
         rg2d = GetComponent<Rigidbody2D>();
         animador = GetComponent<Animator>();
     }
@@ -29,9 +33,22 @@ public class personajeControlador : MonoBehaviour
     {
         animador.SetFloat("velocidad", Mathf.Abs(rg2d.velocity.x));
         animador.SetBool("enPiso", TocandoSuelo);
-        if( Input.GetKeyDown(KeyCode.UpArrow) && TocandoSuelo)
+
+        if (TocandoSuelo)
         {
-            saltar = true;
+            saltoDoble = true;
+        }
+        if ( Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (TocandoSuelo)
+            {
+                saltar = true;
+                saltoDoble = true;
+            }else if(saltoDoble)
+            {
+                saltar = true;
+                saltoDoble = false;
+            }
         }
     }
 
@@ -67,27 +84,37 @@ public class personajeControlador : MonoBehaviour
             rg2d.velocity = new Vector2(rg2d.velocity.x, 0); //rectificar impulso para que no salte de mas
             rg2d.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
             saltar = false;
+           
+           
         }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if( collision.gameObject.tag == "suelo" || collision.gameObject.tag == "plataforma")
-        { 
+        if( collision.gameObject.tag == "suelo")
+        {
+
+            TocandoSuelo = true;
+        }
+        if(collision.gameObject.tag == "plataforma")
+        {
+            transform.parent = collision.transform;
             TocandoSuelo = true;
         }
 
-        if(collision.gameObject.tag == "llave")
-        {
 
-        }
 
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "suelo" || collision.gameObject.tag == "plataforma")
+        if (collision.gameObject.tag == "suelo")
         {
+            TocandoSuelo = false;
+        }
+        if(collision.gameObject.tag == "plataforma")
+        {
+            transform.parent = null;
             TocandoSuelo = false;
         }
     }
