@@ -11,6 +11,10 @@ public class personajeControlador : MonoBehaviour
     public bool saltar;
     public bool saltoDoble;
     public float fuerzaSalto = 7f;
+    private Vector3 posicionOriginal;
+
+    public Camera cam;
+    private bool PuedeTemblar = false;
     
     private Rigidbody2D rg2d;
     private Animator animador;
@@ -24,9 +28,11 @@ public class personajeControlador : MonoBehaviour
     {
         Physics2D.gravity = new Vector2(0f,-13.5f);
         Physics2D.gravity *= 1.8f;
-        Debug.Log(Physics2D.gravity);
+
         rg2d = GetComponent<Rigidbody2D>();
         animador = GetComponent<Animator>();
+
+        posicionOriginal = transform.position;
     }
 
     private void Update()
@@ -87,6 +93,13 @@ public class personajeControlador : MonoBehaviour
            
            
         }
+
+        if (PuedeTemblar)
+        {
+            SacudirCamara();
+        }
+
+
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -101,8 +114,6 @@ public class personajeControlador : MonoBehaviour
             transform.parent = collision.transform;
             TocandoSuelo = true;
         }
-
-
 
     }
 
@@ -121,8 +132,10 @@ public class personajeControlador : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        transform.position = new Vector3(-3, 0, 0);
+        transform.position = posicionOriginal;
         perderVida();
+        PuedeTemblar = true;
+
     }
 
     private void perderVida()
@@ -136,11 +149,26 @@ public class personajeControlador : MonoBehaviour
             sinVidas[vidas-1].sortingOrder = 1;
             sinVidas[vidas-1].maskInteraction = SpriteMaskInteraction.None;
             vidas--;
+            Invoke("DejarDeTemblar", .4f);
         }
         else
         {
             SceneManager.LoadScene("Portada");
         }
 
+    }
+
+    void SacudirCamara()
+    {
+        float posX = Random.Range(cam.transform.position.x - .35f, cam.transform.position.x + .35f);
+
+        float posY = Random.Range(cam.transform.position.y - .35f, cam.transform.position.y + .35f);
+
+        cam.transform.position = new Vector3(posX,posY, cam.transform.position.z );
+    }
+
+    void DejarDeTemblar()
+    {
+        PuedeTemblar = false;
     }
 }
