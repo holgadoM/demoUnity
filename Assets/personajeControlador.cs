@@ -127,14 +127,15 @@ public class personajeControlador : MonoBehaviour
 
     private void perderVida()
     {
+       
         if(vidas >= 1)
         {
 
-        vida[vidas].sortingOrder = 0;
-        vida[vidas].maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-        sinVidas[vidas-1].sortingOrder = 1;
-        sinVidas[vidas-1].maskInteraction = SpriteMaskInteraction.None;
-        vidas--;
+            vida[vidas].sortingOrder = 0;
+            vida[vidas].maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+            sinVidas[vidas-1].sortingOrder = 1;
+            sinVidas[vidas-1].maskInteraction = SpriteMaskInteraction.None;
+            vidas--;
         }
         else
         {
