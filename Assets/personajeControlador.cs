@@ -40,10 +40,8 @@ public class personajeControlador : MonoBehaviour
         animador.SetFloat("velocidad", Mathf.Abs(rg2d.velocity.x));
         animador.SetBool("enPiso", TocandoSuelo);
 
-        if (TocandoSuelo)
-        {
-            saltoDoble = true;
-        }
+        // asignacion OR a|=b => a = a | b; si 'b' es true pone 'a' en true, de lo contrario queda con su valor
+        saltoDoble |= TocandoSuelo;
         if ( Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (TocandoSuelo)
@@ -68,30 +66,13 @@ public class personajeControlador : MonoBehaviour
             rg2d.velocity = fixVelocidad;
         }
         //mover porsonaje
-        float ejeX = Input.GetAxis("Horizontal");
-        rg2d.AddForce(Vector2.right * speed * ejeX);
-
-        float velocidadLimite = Mathf.Clamp( rg2d.velocity.x, -VelocidadMax, VelocidadMax );
-        rg2d.velocity = new Vector2( velocidadLimite, rg2d.velocity.y );
-        
-            // cambiar direccion
-        if( ejeX > 0.01f)
-        {
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-
-        if( ejeX < -0.01f)
-        {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
+        MoverPersonaje();
 
         if(saltar)
         {
             rg2d.velocity = new Vector2(rg2d.velocity.x, 0); //rectificar impulso para que no salte de mas
             rg2d.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
             saltar = false;
-           
-           
         }
 
         if (PuedeTemblar)
@@ -100,6 +81,27 @@ public class personajeControlador : MonoBehaviour
         }
 
 
+    }
+
+    void MoverPersonaje()
+    {
+        float ejeX = Input.GetAxis("Horizontal");
+
+        rg2d.AddForce(Vector2.right * speed * ejeX);
+
+        float velocidadLimite = Mathf.Clamp(rg2d.velocity.x, -VelocidadMax, VelocidadMax);
+        rg2d.velocity = new Vector2(velocidadLimite, rg2d.velocity.y);
+
+        // cambiar direccion
+        if (ejeX > 0.01f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
+        if (ejeX < -0.01f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -143,10 +145,7 @@ public class personajeControlador : MonoBehaviour
        
         if(vidas >= 1)
         {
-
-            vida[vidas].sortingOrder = 0;
             vida[vidas].maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-            sinVidas[vidas-1].sortingOrder = 1;
             sinVidas[vidas-1].maskInteraction = SpriteMaskInteraction.None;
             vidas--;
             Invoke("DejarDeTemblar", .4f);
