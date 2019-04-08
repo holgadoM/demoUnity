@@ -12,6 +12,7 @@ public class personajeControlador : MonoBehaviour
     public bool saltoDoble;
     public float fuerzaSalto = 7f;
     private Vector3 posicionOriginal;
+    private bool mover = true;
 
     public Camera cam;
     private bool PuedeTemblar = false;
@@ -22,6 +23,7 @@ public class personajeControlador : MonoBehaviour
 
     public SpriteRenderer[] vida;
     public SpriteRenderer[] sinVidas;
+    private SpriteRenderer jugador;
     private int vidas = 2;
 
     void Start()
@@ -31,6 +33,7 @@ public class personajeControlador : MonoBehaviour
 
         rg2d = GetComponent<Rigidbody2D>();
         animador = GetComponent<Animator>();
+        jugador = GetComponent<SpriteRenderer>();
 
         posicionOriginal = transform.position;
     }
@@ -66,7 +69,10 @@ public class personajeControlador : MonoBehaviour
             rg2d.velocity = fixVelocidad;
         }
         //mover porsonaje
-        MoverPersonaje();
+        if (mover)
+        {
+            MoverPersonaje();
+        }
 
         if(saltar)
         {
@@ -134,21 +140,20 @@ public class personajeControlador : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        transform.position = posicionOriginal;
         perderVida();
         PuedeTemblar = true;
-
+        transform.position = posicionOriginal;
     }
 
-    private void perderVida()
+    public void perderVida()
     {
-       
-        if(vidas >= 1)
+        if (vidas >= 1)
         {
             vida[vidas].maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
             sinVidas[vidas-1].maskInteraction = SpriteMaskInteraction.None;
             vidas--;
             Invoke("DejarDeTemblar", .4f);
+           
         }
         else
         {
@@ -170,4 +175,46 @@ public class personajeControlador : MonoBehaviour
     {
         PuedeTemblar = false;
     }
+
+    public void Salto()
+    {
+        saltar = true;
+    }
+
+    public void SaltoPerdida(float EnemigoPosX)
+    {
+        saltar = true;
+
+        float lado = Mathf.Sign(EnemigoPosX - transform.position.x );
+       
+        rg2d.AddForce(Vector2.left * lado * fuerzaSalto/2.5f, ForceMode2D.Impulse);
+        perderVida();
+
+
+        mover = false;
+
+        PonerNaranja();
+    
+        Invoke("ActivarMoviento", .7f);
+
+    }
+
+    void ActivarMoviento()
+    {
+        mover = true;
+        PonerBlanco();
+    }
+
+    void PonerNaranja()
+    {
+        jugador.color = new Color(255 / 255f, 106 / 255f, 0f);
+    }
+
+    void PonerBlanco()
+    {
+        jugador.color = Color.white;
+    }
+
+
+  
 }
