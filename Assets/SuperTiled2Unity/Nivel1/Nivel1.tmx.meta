@@ -1,0 +1,68 @@
+fileFormatVersion: 2
+guid: 51310b6562a82425ea1aba2a36e956c3
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: _MapPrfab/Nivel1
+    100002: _MapPrfab/Nivel1/Accesorios
+    100004: _MapPrfab/Nivel1/colision
+    100006: _MapPrfab/Nivel1/colision/Object_11
+    100008: _MapPrfab/Nivel1/colision/Object_13
+    100010: _MapPrfab/Nivel1/colision/Object_13/ConvexPolygon
+    100012: _MapPrfab/Nivel1/colision/Object_13/ConvexPolygon (1)
+    100014: _MapPrfab/Nivel1/Escena
+    400000: _MapPrfab/Nivel1/Transform
+    400002: _MapPrfab/Nivel1/Accesorios/Transform
+    400004: _MapPrfab/Nivel1/colision/Transform
+    400006: _MapPrfab/Nivel1/colision/Object_11/Transform
+    400008: _MapPrfab/Nivel1/colision/Object_13/Transform
+    400010: _MapPrfab/Nivel1/colision/Object_13/ConvexPolygon/Transform
+    400012: _MapPrfab/Nivel1/colision/Object_13/ConvexPolygon (1)/Transform
+    400014: _MapPrfab/Nivel1/Escena/Transform
+    5000000: _MapPrfab/Nivel1/colision/Object_13/Rigidbody2D
+    6000000: _MapPrfab/Nivel1/colision/Object_11/PolygonCollider2D
+    6000002: _MapPrfab/Nivel1/colision/Object_13/ConvexPolygon/PolygonCollider2D
+    6000004: _MapPrfab/Nivel1/colision/Object_13/ConvexPolygon (1)/PolygonCollider2D
+    6600000: _MapPrfab/Nivel1/colision/Object_13/CompositeCollider2D
+    11400000: _MapPrfab/Nivel1/MonoBehaviour-SuperTiled2Unity.SuperMap
+    11400002: _MapPrfab/Nivel1/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
+    11400004: _MapPrfab/Nivel1/Accesorios/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
+    11400006: _MapPrfab/Nivel1/Accesorios/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
+    11400008: _MapPrfab/Nivel1/Accesorios/MonoBehaviour-SuperTiled2Unity.TilemapData
+    11400010: _MapPrfab/Nivel1/colision/MonoBehaviour-SuperTiled2Unity.SuperObjectLayer
+    11400012: _MapPrfab/Nivel1/colision/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
+    11400014: _MapPrfab/Nivel1/colision/Object_11/MonoBehaviour-SuperTiled2Unity.SuperObject
+    11400016: _MapPrfab/Nivel1/colision/Object_11/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
+    11400018: _MapPrfab/Nivel1/colision/Object_11/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
+    11400020: _MapPrfab/Nivel1/colision/Object_13/MonoBehaviour-SuperTiled2Unity.SuperObject
+    11400022: _MapPrfab/Nivel1/colision/Object_13/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
+    11400024: _MapPrfab/Nivel1/colision/Object_13/ConvexPolygon/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
+    11400026: _MapPrfab/Nivel1/colision/Object_13/ConvexPolygon (1)/MonoBehaviour-SuperTiled2Unity.SuperColliderComponent
+    11400028: _MapPrfab/Nivel1/Escena/MonoBehaviour-SuperTiled2Unity.SuperTileLayer
+    11400030: _MapPrfab/Nivel1/Escena/MonoBehaviour-SuperTiled2Unity.SuperCustomProperties
+    11400032: _MapPrfab/Nivel1/Escena/MonoBehaviour-SuperTiled2Unity.TilemapData
+    11400034: _superAsset
+    100100000: _MapPrfab
+    2569400265252428796: _MapPrfab/Nivel1/Grid
+    3664157343022684176: _MapPrfab/Nivel1/Accesorios/TilemapRenderer
+    3664157343022684178: _MapPrfab/Nivel1/Escena/TilemapRenderer
+    8195094279510102542: _MapPrfab/Nivel1/Accesorios/Tilemap
+    8195094279510102544: _MapPrfab/Nivel1/Escena/Tilemap
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 1fa25d03934ea624a82bf2fcee6f0873, type: 3}
+  missingFiles: []
+  errors: []
+  warnings: []
+  missingSortingLayers: []
+  missingLayers: []
+  missingTags: []
+  pixelsPerUnit: 100
+  edgesPerEllipse: 32
+  numberOfObjectsImported: 2
+  tilesAsObjects: 0
+  sortingMode: 0
+  isIsometric: 0
+  customImporterClassName: 
+  internalTilesets: []

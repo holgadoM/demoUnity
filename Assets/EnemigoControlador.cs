@@ -12,19 +12,48 @@ public class EnemigoControlador : MonoBehaviour
     public bool animacionMuerto = false;
 
     public GameObject jugador;
+    private  float RadioVision = 3f;
+
+    public Transform objetivo;
+    public Vector3 inicio;
+    public Vector3 final;
+    public float velocidad = 1f;
     // Start is called before the first frame update
     void Start()
     {
         Rb2d = GetComponent<Rigidbody2D>();
         animacion = GetComponent<Animator>();
+        jugador = GameObject.FindGameObjectWithTag("Player");
+
+        if (objetivo != null)
+        {
+            objetivo.parent = null;
+            inicio = transform.position;
+            final = objetivo.position;
+        }
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
         MovimientoPerpetuo();
+
+        if (objetivo != null)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, objetivo.position, velocidad * Time.deltaTime);
+        }
+
+        if (transform.position == objetivo.position)
+        {
+            objetivo.position = (objetivo.position == inicio) ? final : inicio;
+        }
     }
 
+    void VerificarDistancia()
+    {
+
+
+    }
 
 
     void MovimientoPerpetuo()

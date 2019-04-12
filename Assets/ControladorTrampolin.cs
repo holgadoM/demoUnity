@@ -22,15 +22,12 @@ public class ControladorTrampolin : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("entrando...");
-
         estirado.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         comprimido.maskInteraction = SpriteMaskInteraction.None;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("saliendo...");
         estirado.maskInteraction = SpriteMaskInteraction.None;
         comprimido.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         collision.rigidbody.AddForce(Vector2.up * impulso,ForceMode2D.Impulse);

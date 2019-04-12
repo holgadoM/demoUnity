@@ -11,7 +11,7 @@ public class SeguirCamara : MonoBehaviour
     void Start()
     {
         minCamPos = new Vector2(2.5f, 2f);
-        maxCamPos = new Vector2(20f, 2f);
+        maxCamPos = new Vector2(99f, 2f);
        
     }
 
@@ -25,7 +25,7 @@ public class SeguirCamara : MonoBehaviour
                 Mathf.Clamp(posX, minCamPos.x, maxCamPos.x),
                 Mathf.Clamp(posY, minCamPos.y, maxCamPos.y), 
                 transform.position.z);
-     
+                
     }
 
     float SuavizarMovimiento(float inicio, float fin, float eje )
